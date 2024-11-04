@@ -78,9 +78,9 @@ import org.jhotdraw.util.ResourceBundleUtil;
 public class TextAreaCreationTool extends CreationTool implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    private FloatingTextArea textArea;
-    private TextHolderFigure typingTarget;
-    private Color rubberbandColor = null;
+    FloatingTextArea textArea;
+    TextHolderFigure typingTarget;
+    Color rubberbandColor = null;
 
     public TextAreaCreationTool(TextHolderFigure prototype) {
         super(prototype);
@@ -163,7 +163,7 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         }
     }
 
-    private void saveCurrentTextState() {
+    void saveCurrentTextState() {
         typingTarget.willChange();
         final TextHolderFigure editedFigure = typingTarget;
         final String oldText = typingTarget.getText();
