@@ -1,37 +1,57 @@
 package org.jhotdraw.draw.tool;
 
+import org.jhotdraw.draw.Drawing;
+import org.jhotdraw.draw.DrawingEditor;
+import org.jhotdraw.draw.DrawingView;
+import org.jhotdraw.draw.figure.TextHolderFigure;
+import org.jhotdraw.draw.text.FloatingTextField;
 import org.jgiven.Stage;
-import org.jgiven.annotation.AfterScenario;
-import org.jgiven.annotation.BeforeScenario;
-import org.jgiven.annotation.Given;
+import org.jgiven.annotation.BeforeStage;
+import org.jgiven.annotation.Scenario;
 import org.jgiven.annotation.Then;
 import org.jgiven.annotation.When;
+import org.junit.jupiter.api.Test;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class TextEditingToolTest extends Scenario<TextEditingToolTest.GivenStage, TextEditingToolTest.WhenStage, TextEditingToolTest.ThenStage> {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+/**
+ * JGiven BDD tests for the {@link TextEditingTool} class.
+ */
+public class TextEditingToolTest {
+
+    /** The TextEditingTool instance under test. */
     private TextEditingTool tool;
-    private TextHolderFigure mockTypingTarget;
-    private FloatingTextField mockTextField;
-    private DrawingEditor mockEditor;
-    private DrawingView mockView;
-    private MouseEvent mockMouseEvent;
-    private KeyEvent mockKeyEvent;
-    private ActionEvent mockActionEvent;
 
-    @BeforeScenario
+    /** Mock for the figure being edited. */
+    private TextHolderFigure mockTypingTarget;
+
+    /** Mock for the text field used for editing text. */
+    private FloatingTextField mockTextField;
+
+    /** Mock for the drawing editor. */
+    private DrawingEditor mockEditor;
+
+    /** Mock for the drawing view. */
+    private DrawingView mockView;
+
+    /** Mock for mouse events. */
+    private MouseEvent mockMouseEvent;
+
+    /** Mock for the drawing object. */
+    private Drawing mockDrawing;
+
+    @BeforeStage
     public void setUp() {
         mockTypingTarget = mock(TextHolderFigure.class);
         mockTextField = mock(FloatingTextField.class);
         mockEditor = mock(DrawingEditor.class);
         mockView = mock(DrawingView.class);
         mockMouseEvent = mock(MouseEvent.class);
-        mockKeyEvent = mock(KeyEvent.class);
-        mockActionEvent = mock(ActionEvent.class);
+        mockDrawing = mock(Drawing.class);
 
         when(mockEditor.getActiveView()).thenReturn(mockView);
         when(mockView.isEnabled()).thenReturn(true);
@@ -39,135 +59,111 @@ public class TextEditingToolTest extends Scenario<TextEditingToolTest.GivenStage
         tool = new TextEditingTool(mockTypingTarget);
         tool.textField = mockTextField;
         tool.editor = mockEditor;
+
+        when(tool.getDrawing()).thenReturn(mockDrawing);
     }
 
-    @AfterScenario
-    public void tearDown() {
-        // Clean up if necessary after each scenario
-    }
+    @Scenario
+    public class whenEditing {
 
-    // Given stage
-    public static class GivenStage extends ScenarioStage<GivenStage> {
-
-        @Given("the TextEditingTool is initialized with a typing target")
-        public void givenTheTextEditingToolIsInitializedWithTypingTarget() {
-            // Initialization happens in setUp method
-        }
-
-        @Given("the typing target is null")
-        public void givenTheTypingTargetIsNotSet() {
-            tool.typingTarget = null;
-        }
-
-        @Given("the text has changed in the text field")
-        public void givenTheTextHasChanged() {
-            when(mockTextField.getText()).thenReturn("new text");
-            when(mockTypingTarget.getText()).thenReturn("old text");
-        }
-
-        @Given("the text has not changed in the text field")
-        public void givenTheTextHasNotChanged() {
-            when(mockTextField.getText()).thenReturn("");
-            when(mockTypingTarget.getText()).thenReturn("old text");
-        }
-
-        @Given("the tool is not in editing mode")
-        public void givenTheToolIsNotInEditingMode() {
-            tool.typingTarget = null;
-        }
-    }
-
-    // When stage
-    public static class WhenStage extends ScenarioStage<WhenStage> {
-
-        @When("the edit process begins")
-        public void whenTheEditProcessBegins() {
+        @When("the tool is initialized")
+        public void the_tool_is_initialized() {
             tool.beginEdit(mockTypingTarget);
         }
 
-        @When("the edit process ends")
-        public void whenTheEditProcessEnds() {
+        @Then("it should be in editing mode")
+        public void it_should_be_in_editing_mode() {
+            assertTrue(tool.isEditing());
+        }
+
+        @Then("it should be set as typing target")
+        public void it_should_set_typing_target() {
+            assertEquals(mockTypingTarget, tool.typingTarget);
+        }
+    }
+
+    @Scenario
+    public class whenEndingEdit {
+
+        @When("the text has changed")
+        public void the_text_has_changed() {
+            when(mockTextField.getText()).thenReturn("new text");
+            when(mockTypingTarget.getText()).thenReturn("old text");
             tool.endEdit();
         }
 
-        @When("the cursor is updated while editing")
-        public void whenTheCursorIsUpdatedWhileEditing() {
+        @Then("the text should be updated")
+        public void the_text_should_be_updated() {
+            verify(mockTypingTarget).setText("new text");
+            verify(mockTypingTarget, times(1)).willChange();
+            verify(mockTypingTarget, times(1)).changed();
+            verify(mockTextField, times(1)).endOverlay();
+            assertNull(tool.typingTarget);
+        }
+
+        @When("the text has not changed")
+        public void the_text_has_not_changed() {
+            when(mockTextField.getText()).thenReturn("");
+            when(mockTypingTarget.getText()).thenReturn("old text");
+            tool.endEdit();
+        }
+
+        @Then("the text should not be updated")
+        public void the_text_should_not_be_updated() {
+            verify(mockTypingTarget, times(0)).setText(anyString());
+            verify(mockTextField, times(1)).endOverlay();
+            assertNull(tool.typingTarget);
+        }
+    }
+
+    @Scenario
+    public class whenUpdatingCursor {
+
+        @When("the editing is active")
+        public void the_editing_is_active() {
             tool.typingTarget = mockTypingTarget;
             tool.updateCursor(mockView, new Point());
         }
 
-        @When("the cursor is updated while not editing")
-        public void whenTheCursorIsUpdatedWhileNotEditing() {
-            tool.updateCursor(mockView, new Point());
-        }
-
-        @When("the mouse is pressed on a valid target")
-        public void whenTheMouseIsPressedOnValidTarget() {
-            tool.mousePressed(mockMouseEvent);
-        }
-
-        @When("the mouse is pressed without a valid target")
-        public void whenTheMouseIsPressedWithoutValidTarget() {
-            tool.typingTarget = null;
-            tool.mousePressed(mockMouseEvent);
-        }
-    }
-
-    // Then stage
-    public static class ThenStage extends ScenarioStage<ThenStage> {
-
-        @Then("the tool should be in editing mode")
-        public void thenTheToolShouldBeInEditingMode() {
-            assertTrue(tool.isEditing());
-        }
-
-        @Then("the tool should not be in editing mode")
-        public void thenTheToolShouldNotBeInEditingMode() {
-            assertFalse(tool.isEditing());
-        }
-
-        @Then("an overlay should be created for the text field")
-        public void thenAnOverlayShouldBeCreatedForTheTextField() {
-            verify(mockTextField).createOverlay(any(), eq(mockTypingTarget));
-        }
-
-        @Then("the text field should receive focus")
-        public void thenTheTextFieldShouldReceiveFocus() {
-            verify(mockTextField).requestFocus();
-        }
-
-        @Then("the new text should be set on the typing target")
-        public void thenTheNewTextShouldBeSetOnTheTypingTarget() {
-            verify(mockTypingTarget).setText("new text");
-            verify(mockTypingTarget).willChange();
-            verify(mockTypingTarget).changed();
-            verify(mockTextField).endOverlay();
-        }
-
-        @Then("the typing target should not be modified")
-        public void thenTheTypingTargetShouldNotBeModified() {
-            verify(mockTypingTarget, times(0)).setText(anyString());
-            verify(mockTextField).endOverlay();
-        }
-
-        @Then("the cursor should be set to the default cursor")
-        public void thenTheCursorShouldBeSetToDefaultCursor() {
+        @Then("the cursor should be set to default")
+        public void the_cursor_should_be_set_to_default() {
             verify(mockView).setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         }
 
-        @Then("the cursor should change to crosshair")
-        public void thenTheCursorShouldChangeToCrosshair() {
+        @When("the editing is not active")
+        public void the_editing_is_not_active() {
+            tool.typingTarget = null;
+            tool.updateCursor(mockView, new Point());
+        }
+
+        @Then("the cursor should be set to crosshair")
+        public void the_cursor_should_be_set_to_crosshair() {
             verify(mockView).setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
         }
+    }
 
-        @Then("the editing process should start")
-        public void thenTheEditingProcessShouldStart() {
-            verify(mockTextField).createOverlay(any(), eq(mockTypingTarget));
-            verify(mockTextField).requestFocus();
+    @Scenario
+    public class whenMousePressed {
+
+        @When("the mouse is pressed on the typing target")
+        public void the_mouse_is_pressed_on_the_typing_target() {
+            tool.mousePressed(mockMouseEvent);
         }
 
-        @Then("no action should be taken")
-        public void thenNoActionShouldBeTaken() {
+        @Then("it should start editing if the target exists")
+        public void it_should_start_editing_if_target_exists() {
+            verify(mockTextField, times(1)).createOverlay(any(), eq(mockTypingTarget));
+            verify(mockTextField, times(1)).requestFocus();
+        }
+
+        @When("the mouse is pressed without a typing target")
+        public void the_mouse_is_pressed_without_a_typing_target() {
+            tool.typingTarget = null;
+            tool.mousePressed(mockMouseEvent);
+        }
+
+        @Then("it should do nothing")
+        public void it_should_do_nothing() {
             verify(mockTextField, times(0)).createOverlay(any(), any());
             verify(mockTextField, times(0)).requestFocus();
         }

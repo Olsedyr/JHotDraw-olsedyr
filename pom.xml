@@ -34,7 +34,7 @@
 		</developer>
 	</developers>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.source.Encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -73,5 +73,6 @@
 		<module>jhotdraw-datatransfer</module>
 		<module>jhotdraw-actions</module>
 	</modules>
+
 
 </project>
