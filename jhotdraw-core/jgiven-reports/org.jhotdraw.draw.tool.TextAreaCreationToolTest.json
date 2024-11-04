@@ -1,0 +1,87 @@
+{
+  "className": "org.jhotdraw.draw.tool.TextAreaCreationToolTest",
+  "name": "Text Area Creation Tool",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.tool.TextAreaCreationToolTest",
+      "testMethodName": "scenario4_clearText",
+      "description": "scenario4 clearText",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 1096139400
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 1096139400
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextAreaCreationToolTest",
+      "testMethodName": "scenario3_formatText",
+      "description": "scenario3 formatText",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 2250100
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 2250100
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextAreaCreationToolTest",
+      "testMethodName": "scenario2_editExistingText",
+      "description": "scenario2 editExistingText",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 1588800
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 1588800
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextAreaCreationToolTest",
+      "testMethodName": "scenario1_inputLargeBodiesOfText",
+      "description": "scenario1 inputLargeBodiesOfText",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 1986700
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 1986700
+    }
+  ],
+  "tagMap": {}
+}

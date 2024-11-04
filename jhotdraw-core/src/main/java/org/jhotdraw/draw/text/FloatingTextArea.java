@@ -164,4 +164,7 @@ public class FloatingTextArea {
             editedFigure = null;
         }
     }
+
+    public void setText(String s) {
+    }
 }
