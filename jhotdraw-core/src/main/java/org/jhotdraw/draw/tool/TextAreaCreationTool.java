@@ -78,9 +78,9 @@ import org.jhotdraw.util.ResourceBundleUtil;
 public class TextAreaCreationTool extends CreationTool implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    FloatingTextArea textArea;
-    TextHolderFigure typingTarget;
-    Color rubberbandColor = null;
+    private FloatingTextArea textArea;
+    private TextHolderFigure typingTarget;
+    private Color rubberbandColor = null;
 
     public TextAreaCreationTool(TextHolderFigure prototype) {
         super(prototype);
@@ -92,6 +92,30 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
 
     public void setRubberbandColor(Color c) {
         rubberbandColor = c;
+    }
+
+    public Color getRubberbandColor() {
+        return rubberbandColor;
+    }
+
+    public FloatingTextArea getTextArea() {
+        return textArea;
+    }
+
+    public void setTextArea(FloatingTextArea textArea) {
+        this.textArea = textArea;
+    }
+
+    public TextHolderFigure getTypingTarget() {
+        return typingTarget;
+    }
+
+    public void setTypingTarget(TextHolderFigure typingTarget) {
+        this.typingTarget = typingTarget;
+    }
+
+    public void setDrawingEditor(DrawingEditor editor) {
+        this.editor = editor;
     }
 
     @Override
@@ -109,7 +133,7 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         }
     }
 
-    private void handleTypingTarget() {
+    void handleTypingTarget() {
         endEdit();
         if (isToolDoneAfterCreation()) {
             fireToolDone();
@@ -144,7 +168,7 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         typingTarget = textHolder;
     }
 
-    private Rectangle2D.Double getFieldBounds(TextHolderFigure figure) {
+    Rectangle2D.Double getFieldBounds(TextHolderFigure figure) {
         Rectangle2D.Double r = figure.getDrawingArea();
         Insets2D.Double insets = figure.getInsets();
         insets.subtractTo(r);
@@ -224,4 +248,3 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         }
     }
 }
-
