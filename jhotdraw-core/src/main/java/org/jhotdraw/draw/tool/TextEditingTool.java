@@ -47,7 +47,7 @@ import org.jhotdraw.util.ResourceBundleUtil;
 public class TextEditingTool extends AbstractTool implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    private FloatingTextField textField;
+    public FloatingTextField textField;
     public TextHolderFigure typingTarget;
 
     /**
