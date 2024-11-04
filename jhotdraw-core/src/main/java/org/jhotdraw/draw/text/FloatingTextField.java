@@ -43,7 +43,7 @@ import org.jhotdraw.draw.event.FigureListener;
  * @author Werner Randelshofer
  * @version $Id: FloatingTextField.java -1 $
  */
-public class FloatingTextField {
+public class FloatingTextField{
 
     private TextHolderFigure editedFigure;
     private JTextField textField;
@@ -154,5 +154,9 @@ public class FloatingTextField {
             editedFigure.removeFigureListener(figureHandler);
             editedFigure = null;
         }
+    }
+
+    public void setText(String text) {
+        textField.setText(text);
     }
 }

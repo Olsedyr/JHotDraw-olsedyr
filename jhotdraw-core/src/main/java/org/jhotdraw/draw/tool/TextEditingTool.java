@@ -48,13 +48,22 @@ public class TextEditingTool extends AbstractTool implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private FloatingTextField textField;
-    private TextHolderFigure typingTarget;
+    public TextHolderFigure typingTarget;
 
     /**
      * Creates a new instance.
      */
     public TextEditingTool(TextHolderFigure typingTarget) {
         this.typingTarget = typingTarget;
+        this.editor = editor; // Set the editor here
+    }
+
+    public FloatingTextField getTextField() {
+        return textField; // This method allows access to textField
+    }
+
+    TextHolderFigure getTypingTarget() {
+        return typingTarget;
     }
 
     @Override
@@ -137,7 +146,7 @@ public class TextEditingTool extends AbstractTool implements ActionListener {
         getDrawing().fireUndoableEditHappened(edit);
     }
 
-    private void restoreOldText(String oldText) {
+    public void restoreOldText(String oldText) {
         if (typingTarget != null) {
             typingTarget.willChange();
             typingTarget.setText(oldText);
