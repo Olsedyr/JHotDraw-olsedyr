@@ -80,15 +80,8 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
     private static final long serialVersionUID = 1L;
     private FloatingTextArea textArea;
     private TextHolderFigure typingTarget;
-    /**
-     * Rubberband color of the tool. When this is null, the tool does not
-     * draw a rubberband.
-     */
     private Color rubberbandColor = null;
 
-    /**
-     * Creates a new instance.
-     */
     public TextAreaCreationTool(TextHolderFigure prototype) {
         super(prototype);
     }
@@ -97,12 +90,6 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         super(prototype, attributes);
     }
 
-    /**
-     * Sets the rubberband color for the tool. Setting this to null, disables
-     * the rubberband.
-     *
-     * @param c Rubberband color or null.
-     */
     public void setRubberbandColor(Color c) {
         rubberbandColor = c;
     }
@@ -113,30 +100,22 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         super.deactivate(editor);
     }
 
-    /**
-     * Creates a new figure at the mouse location.
-     * If editing is in progress, this finishes editing.
-     */
     @Override
     public void mousePressed(MouseEvent e) {
-        // Note: The search sequence used here, must be
-        // consistent with the search sequence used by the
-        // HandleTracker, SelectAreaTracker, DelegationSelectionTool, SelectionTool.
         if (typingTarget != null) {
-            endEdit();
-            if (isToolDoneAfterCreation()) {
-                fireToolDone();
-            }
+            handleTypingTarget();
         } else {
             super.mousePressed(e);
         }
     }
 
-    /**
-     * This method allows subclasses to do perform additonal user interactions
-     * after the new figure has been created.
-     * The implementation of this class just invokes fireToolDone.
-     */
+    private void handleTypingTarget() {
+        endEdit();
+        if (isToolDoneAfterCreation()) {
+            fireToolDone();
+        }
+    }
+
     @Override
     protected void creationFinished(Figure createdFigure) {
         getView().clearSelection();
@@ -144,10 +123,6 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         beginEdit((TextHolderFigure) createdFigure);
     }
 
-    /*
-    public void mouseDragged(java.awt.event.MouseEvent e) {
-    }
-     */
     @Override
     public void draw(Graphics2D g) {
         if (createdFigure != null && rubberbandColor != null) {
@@ -159,7 +134,6 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
     protected void beginEdit(TextHolderFigure textHolder) {
         if (textArea == null) {
             textArea = new FloatingTextArea();
-            //textArea.addActionListener(this);
         }
         if (textHolder != typingTarget && typingTarget != null) {
             endEdit();
@@ -174,9 +148,6 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         Rectangle2D.Double r = figure.getDrawingArea();
         Insets2D.Double insets = figure.getInsets();
         insets.subtractTo(r);
-        // FIXME - Find a way to determine the parameters for grow.
-        //r.grow(1,2);
-        //r.width += 16;
         r.x -= 1;
         r.y -= 2;
         r.width += 18;
@@ -186,51 +157,63 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
 
     protected void endEdit() {
         if (typingTarget != null) {
-            typingTarget.willChange();
-            final TextHolderFigure editedFigure = typingTarget;
-            final String oldText = typingTarget.getText();
-            final String newText = textArea.getText();
-            if (newText.length() > 0) {
-                typingTarget.setText(newText);
-            } else {
-                if (createdFigure != null) {
-                    getDrawing().remove(getAddedFigure());
-                    // XXX - Fire undoable edit here!!
-                } else {
-                    typingTarget.setText("");
-                }
-            }
-            UndoableEdit edit = new AbstractUndoableEdit() {
-                private static final long serialVersionUID = 1L;
-
-                @Override
-                public String getPresentationName() {
-                    ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-                    return labels.getString("attribute.text.text");
-                }
-
-                @Override
-                public void undo() {
-                    super.undo();
-                    editedFigure.willChange();
-                    editedFigure.setText(oldText);
-                    editedFigure.changed();
-                }
-
-                @Override
-                public void redo() {
-                    super.redo();
-                    editedFigure.willChange();
-                    editedFigure.setText(newText);
-                    editedFigure.changed();
-                }
-            };
-            getDrawing().fireUndoableEditHappened(edit);
-            typingTarget.changed();
+            saveCurrentTextState();
             typingTarget = null;
             textArea.endOverlay();
         }
-        //         view().checkDamage();
+    }
+
+    private void saveCurrentTextState() {
+        typingTarget.willChange();
+        final TextHolderFigure editedFigure = typingTarget;
+        final String oldText = typingTarget.getText();
+        final String newText = textArea.getText();
+
+        if (newText.length() > 0) {
+            typingTarget.setText(newText);
+        } else {
+            handleEmptyText();
+        }
+
+        createUndoableEdit(editedFigure, oldText, newText);
+        typingTarget.changed();
+    }
+
+    private void handleEmptyText() {
+        if (createdFigure != null) {
+            getDrawing().remove(getAddedFigure());
+        } else {
+            typingTarget.setText("");
+        }
+    }
+
+    private void createUndoableEdit(final TextHolderFigure editedFigure, final String oldText, final String newText) {
+        UndoableEdit edit = new AbstractUndoableEdit() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public String getPresentationName() {
+                ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                return labels.getString("attribute.text.text");
+            }
+
+            @Override
+            public void undo() {
+                super.undo();
+                editedFigure.willChange();
+                editedFigure.setText(oldText);
+                editedFigure.changed();
+            }
+
+            @Override
+            public void redo() {
+                super.redo();
+                editedFigure.willChange();
+                editedFigure.setText(newText);
+                editedFigure.changed();
+            }
+        };
+        getDrawing().fireUndoableEditHappened(edit);
     }
 
     @Override
@@ -241,3 +224,4 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
         }
     }
 }
+
