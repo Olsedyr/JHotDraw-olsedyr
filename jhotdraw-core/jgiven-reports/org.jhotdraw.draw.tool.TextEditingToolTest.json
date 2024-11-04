@@ -1,0 +1,662 @@
+{
+  "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+  "name": "Text Editing Tool",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+      "testMethodName": "mouse_pressed_does_nothing_if_no_target_exists",
+      "description": "mouse pressed does nothing if no target exists",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "the text editing tool is initialized",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the text editing tool is initialized"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 367492600,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is not set",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is not set"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 65300,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "mouse is pressed",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "mouse is pressed"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 311700,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "verify no overlay created and no focus requested",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "verify no overlay created and no focus requested"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 8290100,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 404199400
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 404199400
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+      "testMethodName": "tool_is_in_editing_mode_when_typing_target_is_set",
+      "description": "tool is in editing mode when typing target is set",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "the text editing tool is initialized",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the text editing tool is initialized"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 2091300,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is set",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is set"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 56000,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "edit is started on the typing target",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "edit is started on the typing target"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 2605800,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "tool is in editing mode",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "tool is in editing mode"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 3494100,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "verify overlay created and focus requested",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "verify overlay created and focus requested"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 6248000,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 16897000
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 16897000
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+      "testMethodName": "cursor_is_updated_to_crosshair_when_not_editing",
+      "description": "cursor is updated to crosshair when not editing",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "the text editing tool is initialized",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the text editing tool is initialized"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 2018900,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is not set",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is not set"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 67100,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "update cursor with point",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "update cursor with point"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1530700,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "cursor is set to",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "cursor is set to"
+                },
+                {
+                  "value": "1",
+                  "argumentInfo": {
+                    "argumentName": "cursorType",
+                    "formattedValue": "1"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 7258500,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 12286900
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 12286900
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+      "testMethodName": "ending_edit_without_text_change_does_not_update_target_text",
+      "description": "ending edit without text change does not update target text",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "the text editing tool is initialized",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the text editing tool is initialized"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1621600,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is set",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is set"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 56400,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "text in text field is",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "text in text field is"
+                },
+                {
+                  "value": "",
+                  "argumentInfo": {
+                    "argumentName": "text",
+                    "formattedValue": ""
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1265400,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "text in typing target is",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "text in typing target is"
+                },
+                {
+                  "value": "old text",
+                  "argumentInfo": {
+                    "argumentName": "text",
+                    "formattedValue": "old text"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 602600,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "edit is ended",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "edit is ended"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 353500,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is null",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is null"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 483300,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 5912300
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 5912300
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+      "testMethodName": "cursor_is_updated_to_default_when_editing",
+      "description": "cursor is updated to default when editing",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "the text editing tool is initialized",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the text editing tool is initialized"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 5762800,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is set",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is set"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 81000,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "update cursor with point",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "update cursor with point"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 683700,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "cursor is set to",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "cursor is set to"
+                },
+                {
+                  "value": "0",
+                  "argumentInfo": {
+                    "argumentName": "cursorType",
+                    "formattedValue": "0"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1106200,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 9743200
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 9743200
+    },
+    {
+      "className": "org.jhotdraw.draw.tool.TextEditingToolTest",
+      "testMethodName": "ending_edit_with_text_change_updates_target_text",
+      "description": "ending edit with text change updates target text",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "the text editing tool is initialized",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the text editing tool is initialized"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1511500,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is set",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is set"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 60000,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "text in text field is",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "text in text field is"
+                },
+                {
+                  "value": "new text",
+                  "argumentInfo": {
+                    "argumentName": "text",
+                    "formattedValue": "new text"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1371800,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "text in typing target is",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "text in typing target is"
+                },
+                {
+                  "value": "old text",
+                  "argumentInfo": {
+                    "argumentName": "text",
+                    "formattedValue": "old text"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1249200,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "edit is ended",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "edit is ended"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1823900,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target text is set to",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target text is set to"
+                },
+                {
+                  "value": "new text",
+                  "argumentInfo": {
+                    "argumentName": "text",
+                    "formattedValue": "new text"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1102300,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "typing target is null",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "typing target is null"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 57100,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 8567400
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 8567400
+    }
+  ],
+  "tagMap": {}
+}

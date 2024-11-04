@@ -137,6 +137,11 @@ public class DefaultDrawingView
         }
     }
 
+    @Override
+    public MouseEvent getMouseEvent() {
+        return null;
+    }
+
     /**
      * Draws the background of the drawing view.
      */

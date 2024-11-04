@@ -11,10 +11,7 @@ import org.jhotdraw.draw.figure.Figure;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelListener;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -514,4 +511,6 @@ public interface DrawingView {
     public void addMouseWheelListener(MouseWheelListener l);
 
     public void removeMouseWheelListener(MouseWheelListener l);
+
+    MouseEvent getMouseEvent();
 }
