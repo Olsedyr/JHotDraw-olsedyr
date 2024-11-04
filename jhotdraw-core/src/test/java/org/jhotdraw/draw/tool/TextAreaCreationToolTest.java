@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class TextAreaCreationToolTest {
+public class TextAreaCreationToolTest {
 
     @Mock
     private TextHolderFigure prototype;
