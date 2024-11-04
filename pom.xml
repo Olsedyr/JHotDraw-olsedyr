@@ -73,13 +73,5 @@
 		<module>jhotdraw-datatransfer</module>
 		<module>jhotdraw-actions</module>
 	</modules>
-	<dependencies>
-		<!-- Add JGiven dependency if needed for multiple modules -->
-		<dependency>
-			<groupId>org.jgiven</groupId>
-			<artifactId>jgiven-junit</artifactId>
-			<version>0.17.0</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+
 </project>

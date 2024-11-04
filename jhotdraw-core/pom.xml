@@ -58,5 +58,11 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.holixon.axon.testing</groupId>
+			<artifactId>axon-testing-jgiven-junit</artifactId>
+			<version>4.7.4.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
