@@ -89,50 +89,60 @@ public class TextEditingTool extends AbstractTool implements ActionListener {
 
     @Override
     public void mouseReleased(MouseEvent evt) {
+        // No operation
     }
 
     protected void endEdit() {
         if (typingTarget != null) {
             typingTarget.willChange();
             final TextHolderFigure editedFigure = typingTarget;
-            final String oldText = typingTarget.getText();
+            final String oldText = editedFigure.getText();
             final String newText = textField.getText();
+
             if (newText.length() > 0) {
-                typingTarget.willChange();
-                typingTarget.setText(newText);
-                typingTarget.changed();
+                editedFigure.setText(newText);
+                editedFigure.changed();
+                createUndoableEdit(oldText, newText);
             }
-            UndoableEdit edit = new AbstractUndoableEdit() {
-                private static final long serialVersionUID = 1L;
 
-                @Override
-                public String getPresentationName() {
-                    ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-                    return labels.getString("attribute.text.text");
-                }
-
-                @Override
-                public void undo() {
-                    super.undo();
-                    editedFigure.willChange();
-                    editedFigure.setText(oldText);
-                    editedFigure.changed();
-                }
-
-                @Override
-                public void redo() {
-                    super.redo();
-                    editedFigure.willChange();
-                    editedFigure.setText(newText);
-                    editedFigure.changed();
-                }
-            };
-            getDrawing().fireUndoableEditHappened(edit);
-            typingTarget.changed();
             typingTarget = null;
             textField.endOverlay();
         }
-        //         view().checkDamage();
+    }
+
+    private void createUndoableEdit(String oldText, String newText) {
+        UndoableEdit edit = new AbstractUndoableEdit() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public String getPresentationName() {
+                ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                return labels.getString("attribute.text.text");
+            }
+
+            @Override
+            public void undo() {
+                super.undo();
+                restoreOldText(oldText); // Restore the old text
+            }
+
+            @Override
+            public void redo() {
+                super.redo();
+                typingTarget.willChange(); // Call willChange before changing text back
+                typingTarget.setText(newText); // Set the new text on redo
+                typingTarget.changed(); // Mark the figure as changed
+            }
+        };
+        getDrawing().fireUndoableEditHappened(edit);
+    }
+
+    private void restoreOldText(String oldText) {
+        if (typingTarget != null) {
+            typingTarget.willChange();
+            typingTarget.setText(oldText);
+            typingTarget.changed();
+        }
     }
 
     @Override
