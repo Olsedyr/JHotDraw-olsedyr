@@ -23,6 +23,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.bringToFront";
+    public static final String RESOURCE_BUNDLE_BASENAME = "org.jhotdraw.draw.Labels";
 
     /**
      * Creates a new instance.
@@ -30,7 +31,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
     public BringToFrontAction(DrawingEditor editor) {
         super(editor);
         ResourceBundleUtil labels
-                = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                = ResourceBundleUtil.getBundle(RESOURCE_BUNDLE_BASENAME);
         labels.configureAction(this, ID);
         updateEnabledState();
     }
@@ -46,7 +47,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
             @Override
             public String getPresentationName() {
                 ResourceBundleUtil labels
-                        = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                        = ResourceBundleUtil.getBundle(RESOURCE_BUNDLE_BASENAME);
                 return labels.getTextProperty(ID);
             }
 

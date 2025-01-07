@@ -23,6 +23,8 @@ public class SendToBackAction extends AbstractSelectedAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.sendToBack";
+    public static final String RESOURCE_BUNDLE_BASENAME = "org.jhotdraw.draw.Labels";
+
 
     /**
      * Creates a new instance.
@@ -30,7 +32,7 @@ public class SendToBackAction extends AbstractSelectedAction {
     public SendToBackAction(DrawingEditor editor) {
         super(editor);
         ResourceBundleUtil labels
-                = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                = ResourceBundleUtil.getBundle(RESOURCE_BUNDLE_BASENAME);
         labels.configureAction(this, ID);
         updateEnabledState();
     }
@@ -46,7 +48,7 @@ public class SendToBackAction extends AbstractSelectedAction {
             @Override
             public String getPresentationName() {
                 ResourceBundleUtil labels
-                        = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                        = ResourceBundleUtil.getBundle(RESOURCE_BUNDLE_BASENAME);
                 return labels.getTextProperty(ID);
             }
 
