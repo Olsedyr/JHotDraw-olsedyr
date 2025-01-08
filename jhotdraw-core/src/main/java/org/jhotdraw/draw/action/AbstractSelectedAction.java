@@ -9,6 +9,7 @@ package org.jhotdraw.draw.action;
 
 import java.beans.*;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.undo.*;
 import org.jhotdraw.api.app.Disposable;
@@ -50,7 +51,9 @@ public abstract class AbstractSelectedAction
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            if ((evt.getPropertyName() == null && DrawingEditor.ACTIVE_VIEW_PROPERTY == null) || (evt.getPropertyName() != null && evt.getPropertyName().equals(DrawingEditor.ACTIVE_VIEW_PROPERTY))) {
+            String propertyName = evt.getPropertyName();
+
+            if (Objects.equals(propertyName, DrawingEditor.ACTIVE_VIEW_PROPERTY)) {
                 if (activeView != null) {
                     activeView.removeFigureSelectionListener(this);
                     activeView.removePropertyChangeListener(this);
