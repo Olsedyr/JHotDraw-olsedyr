@@ -35,7 +35,8 @@ import org.jhotdraw.samples.svg.action.CombineAction;
 import org.jhotdraw.samples.svg.action.SplitAction;
 import org.jhotdraw.samples.svg.action.ViewSourceAction;
 import org.jhotdraw.samples.svg.figures.SVGGroupFigure;
-
+import static org.jhotdraw.draw.action.ArrangeActionType.BRING_TO_FRONT;
+import static org.jhotdraw.draw.action.ArrangeActionType.SEND_TO_BACK;
 /**
  * Provides meta-data and factory methods for an application.
  * <p>
@@ -92,8 +93,8 @@ public class SVGApplicationModel extends DefaultApplicationModel {
         m.put(UngroupAction.ID, new UngroupAction(editor, new SVGGroupFigure()));
         m.put(CombineAction.ID, new CombineAction(editor));
         m.put(SplitAction.ID, new SplitAction(editor));
-        m.put(BringToFrontAction.ID, new BringToFrontAction(editor));
-        m.put(SendToBackAction.ID, new SendToBackAction(editor));
+        m.put(ArrangeAction.getActionId(BRING_TO_FRONT), new ArrangeAction(editor, BRING_TO_FRONT));
+        m.put(ArrangeAction.getActionId(SEND_TO_BACK), new ArrangeAction(editor, SEND_TO_BACK));
         //view.addDisposable(action);
     }
 
@@ -121,8 +122,8 @@ public class SVGApplicationModel extends DefaultApplicationModel {
         m.put(UngroupAction.ID, new UngroupAction(editor, new SVGGroupFigure()));
         m.put(CombineAction.ID, new CombineAction(editor));
         m.put(SplitAction.ID, new SplitAction(editor));
-        m.put(BringToFrontAction.ID, new BringToFrontAction(editor));
-        m.put(SendToBackAction.ID, new SendToBackAction(editor));
+        m.put(ArrangeAction.getActionId(BRING_TO_FRONT), new ArrangeAction(editor,BRING_TO_FRONT));
+        m.put(ArrangeAction.getActionId(SEND_TO_BACK), new ArrangeAction(editor,SEND_TO_BACK));
         return m;
     }
 
@@ -147,8 +148,8 @@ public class SVGApplicationModel extends DefaultApplicationModel {
                 m.add(am.get(CombineAction.ID));
                 m.add(am.get(SplitAction.ID));
                 m.addSeparator();
-                m.add(am.get(BringToFrontAction.ID));
-                m.add(am.get(SendToBackAction.ID));
+                m.add(am.get(ArrangeAction.getActionId(BRING_TO_FRONT)));
+                m.add(am.get(ArrangeAction.getActionId(SEND_TO_BACK)));
             }
 
             @Override

@@ -13,6 +13,7 @@ import java.util.*;
 import javax.swing.event.*;
 import org.jhotdraw.draw.FigureLayerComparator;
 import static org.jhotdraw.draw.AttributeKeys.*;
+import org.jhotdraw.draw.action.ArrangeActionType;
 import org.jhotdraw.draw.event.FigureAdapter;
 import org.jhotdraw.draw.event.FigureEvent;
 import org.jhotdraw.geom.Dimension2DDouble;
@@ -243,18 +244,13 @@ public abstract class QuadTreeCompositeFigure
     }
 
     @Override
-    public void bringToFront(Figure figure) {
+    public void arrange(Figure figure, ArrangeActionType type) {
         if (children.remove(figure)) {
-            children.add(figure);
-            needsSorting = true;
-            fireAreaInvalidated(figure.getDrawingArea());
-        }
-    }
-
-    @Override
-    public void sendToBack(Figure figure) {
-        if (children.remove(figure)) {
-            children.add(0, figure);
+            if (type.equals(ArrangeActionType.SEND_TO_BACK)) {
+                children.add(0, figure);
+            } else if (type.equals(ArrangeActionType.BRING_TO_FRONT)) {
+                children.add(figure);
+            }
             needsSorting = true;
             fireAreaInvalidated(figure.getDrawingArea());
         }

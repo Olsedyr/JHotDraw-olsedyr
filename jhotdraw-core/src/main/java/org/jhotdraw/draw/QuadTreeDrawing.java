@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw;
 
+import org.jhotdraw.draw.action.ArrangeActionType;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.figure.AbstractCompositeFigure;
 import java.awt.*;
@@ -249,18 +250,13 @@ public class QuadTreeDrawing extends AbstractDrawing {
     }
 
     @Override
-    public void bringToFront(Figure figure) {
+    public void arrange(Figure figure, ArrangeActionType type) {
         if (children.remove(figure)) {
-            children.add(figure);
-            needsSorting = true;
-            fireAreaInvalidated(figure.getDrawingArea());
-        }
-    }
-
-    @Override
-    public void sendToBack(Figure figure) {
-        if (children.remove(figure)) {
-            children.add(0, figure);
+            if (type.equals(ArrangeActionType.SEND_TO_BACK)) {
+                children.add(0, figure);
+            } else if (type.equals(ArrangeActionType.BRING_TO_FRONT)) {
+                children.add(figure);
+            }
             needsSorting = true;
             fireAreaInvalidated(figure.getDrawingArea());
         }
