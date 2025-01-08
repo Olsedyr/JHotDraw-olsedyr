@@ -33,8 +33,9 @@ public class ArrangeAction extends AbstractSelectedAction {
     public ArrangeAction(DrawingEditor editor, ArrangeActionType type) {
         super(editor);
         this.orderType = type;
-        ResourceBundleUtil labels = ResourceBundleUtil.getBundle(RESOURCE_BUNDLE_BASENAME);
-        labels.configureAction(this, getActionId(type));
+        ResourceBundleUtil
+                .getBundle(RESOURCE_BUNDLE_BASENAME)
+                .configureAction(this, getActionId(type));
         updateEnabledState();
     }
 
@@ -67,12 +68,6 @@ public class ArrangeAction extends AbstractSelectedAction {
         });
     }
 
-//    public static void sendToBack(DrawingView view, Collection<Figure> figures) {
-//        Drawing drawing = view.getDrawing();
-//        for (Figure figure : figures) { // XXX Shouldn't the figures be sorted here back to front?
-//            drawing.sendToBack(figure);
-//        }
-//    }
 
     public static void arrange(DrawingView view, Collection<Figure> figures, ArrangeActionType type) {
         Drawing drawing = view.getDrawing();
