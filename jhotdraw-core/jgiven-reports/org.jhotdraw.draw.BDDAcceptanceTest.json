@@ -1,0 +1,214 @@
+{
+  "className": "org.jhotdraw.draw.BDDAcceptanceTest",
+  "name": "BDD Acceptance",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.BDDAcceptanceTest",
+      "testMethodName": "arrange_scenario_without_changing_other_orders",
+      "description": "arrange scenario without changing other orders",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "a drawing with multiple objects",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a drawing with multiple objects"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 97475100,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "I select an object and click the send to back button",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "I select an object and click the send to back button"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 403900,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "the order should be A C B",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the order should be A C B"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 42251300,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 151886200
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 151886200
+    },
+    {
+      "className": "org.jhotdraw.draw.BDDAcceptanceTest",
+      "testMethodName": "send_to_back_scenario",
+      "description": "send to back scenario",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "a drawing with multiple objects",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a drawing with multiple objects"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 116200,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "I select an object and click the send to back button",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "I select an object and click the send to back button"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 33300,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "the selected object should be moved to the bottom layer of the drawing",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the selected object should be moved to the bottom layer of the drawing"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1002600,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 1670600
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 1670600
+    },
+    {
+      "className": "org.jhotdraw.draw.BDDAcceptanceTest",
+      "testMethodName": "bring_to_front_scenario",
+      "description": "bring to front scenario",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "a drawing with multiple objects",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a drawing with multiple objects"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 56600,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "I select an object and click the bring to front button",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "I select an object and click the bring to front button"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 36600,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "the selected object should be brought to the front of the drawing",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the selected object should be brought to the front of the drawing"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 54800,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 479700
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 479700
+    }
+  ],
+  "tagMap": {}
+}
